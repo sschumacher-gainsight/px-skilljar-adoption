@@ -625,7 +625,12 @@
     ];
     let i = 0;
     const tick = () => {
-      if (i >= steps.length) return;
+      if (i >= steps.length) {
+        if (selected && courses[selected.id] && courses[selected.id].ratings) {
+          setTimeout(() => showFeedback(selected.id), 800);
+        }
+        return;
+      }
       appendLog(steps[i][0], steps[i][1]);
       i++;
       setTimeout(tick, 280 + Math.random()*220);
