@@ -219,6 +219,16 @@
       </div>
       <div class="text-xs text-slate-500" id="impactMode">mode</div>
     </div>
+    <!-- The "screenshot" of the live Skilljar banner -->
+    <a id="impactBannerLink" target="_blank" class="block mb-5 no-underline">
+      <div id="impactBanner" style="background:linear-gradient(135deg,#22c55e,#16a34a 65%,#15803d);color:white;padding:20px 24px;border-radius:12px;font-family:system-ui,sans-serif;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s">
+        <div style="position:absolute;top:-12px;right:-4px;font-size:90px;opacity:0.18;line-height:1">🏆</div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.92;font-weight:600">Most Successful Admin Track · Gainsight PX verified · LIVE ON SKILLJAR</div>
+        <div id="impactBannerHeadline" style="font-size:30px;font-weight:800;margin-top:6px;letter-spacing:-0.01em">📈 +0% Adoption Lift</div>
+        <div id="impactBannerSub" style="font-size:14px;margin-top:8px;opacity:0.95;max-width:620px;line-height:1.45"></div>
+        <div id="impactBannerStats" style="display:flex;gap:20px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.25);font-size:12px;font-weight:500"></div>
+      </div>
+    </a>
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-8 h-[280px]">
         <canvas id="impactChart"></canvas>
@@ -534,6 +544,26 @@
 
     // Link
     document.getElementById("impactCourseLink").href = entry.course_url;
+
+    // Skilljar banner mirror (the same banner that's stamped on the course page)
+    const pct = entry.lift?.users_pct_of_active ?? 0;
+    const finalUsers = entry.measurements?.[entry.measurements.length - 1]?.users ?? 0;
+    const finalAccounts = entry.measurements?.[entry.measurements.length - 1]?.accounts ?? 0;
+    const baselinePctOfActive = entry.baseline_users && entry.total_active_users
+      ? ((entry.baseline_users / entry.total_active_users) * 100).toFixed(1) : "0.0";
+    const finalPctOfActive = ((finalUsers / (entry.total_active_users || 1)) * 100).toFixed(1);
+    document.getElementById("impactBannerLink").href = entry.course_url;
+    document.getElementById("impactBannerHeadline").textContent = `📈 +${pct}% Adoption Lift`;
+    document.getElementById("impactBannerSub").innerHTML =
+      `Graduates of this course moved their team's ${entry.feature_name} adoption from ` +
+      `<strong>${baselinePctOfActive}% &rarr; ${finalPctOfActive}%</strong> in ${entry.lift?.days_elapsed ?? 30} days. ` +
+      `Join <strong>${finalAccounts} admins</strong> setting the EmailMonkey benchmark &mdash; ` +
+      `finish the course to earn the <strong>Most Successful Admin</strong> badge.`;
+    document.getElementById("impactBannerStats").innerHTML = `
+      <div><span style="opacity:0.7">Graduates</span> <strong style="font-size:14px">${Math.round(finalAccounts * 0.575)}</strong></div>
+      <div><span style="opacity:0.7">Adopting admins</span> <strong style="font-size:14px">${finalAccounts}</strong></div>
+      <div><span style="opacity:0.7">Lift</span> <strong style="font-size:14px">+${pct}%</strong></div>
+      <div><span style="opacity:0.7">Window</span> <strong style="font-size:14px">${entry.lift?.days_elapsed ?? 30} days</strong></div>`;
 
     // Chart
     if (impactChart) impactChart.destroy();
