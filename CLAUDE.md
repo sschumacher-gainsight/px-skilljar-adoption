@@ -90,3 +90,32 @@ Features with zero or near-zero adoption are churn risk signals. A customer who 
 4. **PX measures the result** — adoption data the following week shows whether the course moved the needle
 
 This is the observability -> education -> measurement loop that directly protects GRR and drives NRR through feature expansion.
+
+---
+
+## Spencer's extension: Adoption Impact Loop skill
+
+The team baseline ends at step 3 (course published). The `spencer` branch adds step 4 as a real, runnable skill — not just an idea.
+
+**Trigger:** `run adoption impact loop` or `/adoption-impact-loop`
+
+**What it does beyond the team baseline:**
+
+- Records a baseline measurement in `adoption_history.json` at course publish time
+- Schedules follow-up PX queries at Day 3 / 7 / 14 / 30 (or seeds a realistic curve in `--demo` mode)
+- When the lift threshold is crossed at Day 30, **stamps the Skilljar course with a "Lifted +X% adoption" impact badge** — green banner on the course page, plus a structured Skilljar label
+- Dashboard auto-renders the trajectory chart and the badge
+
+**Where it lives:** `.claude/skills/adoption-impact-loop/SKILL.md` — project-scoped, auto-loaded when you run Claude Code in this repo.
+
+**Helper scripts:** `.claude/skills/adoption-impact-loop/scripts/`
+- `seed_demo_trajectory.py` — generates a sigmoid lift curve for live demos
+- `stamp_impact_badge.sh` — PATCH the course description + apply Skilljar label
+
+**Demo mode (live on stage):**
+```
+run adoption impact loop --demo
+```
+Detects gap → builds course → records baseline → seeds 30-day trajectory → stamps badge — all in one go.
+
+This is the differentiation: the team builds the course; the loop proves it worked.

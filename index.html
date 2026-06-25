@@ -166,9 +166,9 @@
       <div class="text-xs text-slate-500 mt-1">feature sets &lt; 5% adoption</div>
     </div>
     <div class="bg-panel border border-line rounded-xl p-4">
-      <div class="text-xs uppercase tracking-wider text-slate-400">Recommended courses</div>
-      <div class="text-3xl font-bold mt-1 gradient-text">3</div>
-      <div class="text-xs text-slate-500 mt-1">auto-generated from PX data</div>
+      <div class="text-xs uppercase tracking-wider text-slate-400">Courses published</div>
+      <div class="text-3xl font-bold mt-1 gradient-text">2</div>
+      <div class="text-xs text-slate-500 mt-1">live on Skilljar · 2 lifted</div>
     </div>
   </section>
 
@@ -208,6 +208,49 @@
     <div id="createLog" class="hidden mt-4 rounded-lg border border-line bg-ink/70 p-3 font-mono text-xs text-slate-300 space-y-1"></div>
   </section>
 
+  <!-- VERIFIED IMPACT (new — close the loop) -->
+  <section id="impactSection" class="col-span-12 bg-panel border border-line rounded-xl p-5 hidden">
+    <div class="flex items-baseline justify-between mb-4">
+      <div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
+          <span class="w-2 h-2 rounded-full bg-ok pulse-dot"></span> Verified Impact · Adoption Impact Loop
+        </div>
+        <h2 class="text-xl font-semibold mt-1" id="impactTitle">Adoption trajectory since launch</h2>
+      </div>
+      <div class="text-xs text-slate-500" id="impactMode">mode</div>
+    </div>
+    <!-- The "screenshot" of the live Skilljar banner -->
+    <a id="impactBannerLink" target="_blank" class="block mb-5 no-underline">
+      <div id="impactBanner" style="background:linear-gradient(135deg,#22c55e,#16a34a 65%,#15803d);color:white;padding:20px 24px;border-radius:12px;font-family:system-ui,sans-serif;position:relative;overflow:hidden;cursor:pointer;transition:transform .15s">
+        <div style="position:absolute;top:-12px;right:-4px;font-size:90px;opacity:0.18;line-height:1">🏆</div>
+        <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.92;font-weight:600">Most Successful Admin Track · Gainsight PX verified · LIVE ON SKILLJAR</div>
+        <div id="impactBannerHeadline" style="font-size:30px;font-weight:800;margin-top:6px;letter-spacing:-0.01em">📈 +0% Adoption Lift</div>
+        <div id="impactBannerSub" style="font-size:14px;margin-top:8px;opacity:0.95;max-width:620px;line-height:1.45"></div>
+        <div id="impactBannerStats" style="display:flex;gap:20px;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.25);font-size:12px;font-weight:500"></div>
+      </div>
+    </a>
+    <div class="grid grid-cols-12 gap-5">
+      <div class="col-span-8 h-[280px]">
+        <canvas id="impactChart"></canvas>
+      </div>
+      <div class="col-span-4 flex flex-col gap-3">
+        <div id="impactBadge" class="rounded-lg p-4 bg-gradient-to-br from-ok/30 to-ok/10 border border-ok/40">
+          <div class="text-xs uppercase tracking-wider text-ok mb-1">Badge stamped in Skilljar</div>
+          <div class="text-2xl font-bold" id="impactPct">+0%</div>
+          <div class="text-xs text-slate-300 mt-1" id="impactSummary"></div>
+        </div>
+        <div class="rounded-lg p-4 border border-line bg-ink/50">
+          <div class="text-xs uppercase tracking-wider text-slate-400 mb-2">Latest measurement</div>
+          <div class="text-sm text-slate-200" id="impactLatest"></div>
+          <div class="text-xs text-slate-500 mt-2" id="impactNote"></div>
+        </div>
+        <a id="impactCourseLink" target="_blank" class="text-center text-sm bg-accent2/20 text-accent2 border border-accent2/40 px-3 py-2 rounded-lg hover:bg-accent2/30">
+          ↗ Open course on Skilljar
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Bottom: Recommended course catalog -->
   <section class="col-span-12 bg-panel border border-line rounded-xl p-5">
     <div class="flex items-baseline justify-between mb-4">
@@ -242,7 +285,7 @@
     { id: "97147957", name: "Campaigns Page",   product: "EmailMonkey", users: 5061, events: 32342, accounts: 183 },
     { id: "946ab76f", name: "Templates",        product: "EmailMonkey", users: 2564, events: 3972,  accounts: 180 },
     { id: "a92a23cd", name: "Login Page",       product: "EmailMonkey", users: 1832, events: 2359,  accounts: 180 },
-    { id: "ec801856", name: "Activity Page",    product: "EmailMonkey", users: 1763, events: 2596,  accounts: 179 },
+    { id: "ec801856", name: "Activity Page",    product: "EmailMonkey", users: 1957, events: 2869,  accounts: 181 },
     { id: "f8d6ac2a", name: "Archive",          product: "EmailMonkey", users: 1603, events: 1958,  accounts: 175 },
     { id: "4b13b008", name: "Integration Page", product: "EmailMonkey", users: 1596, events: 2246,  accounts: 178 },
     { id: "eebe2759", name: "Socials",          product: "EmailMonkey", users: 0,    events: 0,     accounts: 0 },
@@ -268,6 +311,24 @@
 
   // ---------- Course recommendations (one per gap feature set) ----------
   const courses = {
+    ec801856: {
+      title: "Mastering the Activity Page: From Sends to Insights",
+      tagline: "1,957 / 5,061 users — 38.7% adoption. Customers ship campaigns but rarely read what happened next.",
+      duration: "28 min · 14 lessons",
+      audience: "Email marketers, CSMs, growth leads",
+      url: "https://spencerlearningcenter.skilljar.com/mastering-the-activity-page-from-sends-to-insights",
+      live: true,
+      gap: { users: 1957, of: 5061, accounts: 181, pct: 38.7 },
+      modules: [
+        { t: "Why your Activity Page is a goldmine", d: "The 8 metrics that tell the whole story plus industry benchmarks." },
+        { t: "Tour of the Activity Page", d: "Where it lives, the summary panel, click maps, recipient detail." },
+        { t: "Filters and drill-downs", d: "Date / channel / type filters, the comparison view, contact timelines." },
+        { t: "From data to action", d: "The diagnostic ladder for weak campaigns, subscribed weekly reports." },
+        { t: "Final Project — audit a real campaign", d: "1-page audit with all 8 metrics, diagnosis, and one action item." }
+      ],
+      assessment: "4 quizzes · 12 questions · 80% to pass",
+      cta: "Triggered by PX engagement when an account ships a campaign but hasn't opened Activity in 7 days."
+    },
     eebe2759: {
       title: "Socials in EmailMonkey: From Zero to Multi-Channel",
       tagline: "0 users / 183 accounts touched it in 7 days. Biggest gap, biggest opportunity.",
@@ -420,9 +481,130 @@
         <div class="text-sm text-slate-300">${c.cta}</div>
       </div>`;
     selected = f;
+    renderImpact(f);
   }
 
   let selected = null;
+
+  // ---------- Adoption Impact Loop: trajectory + badge ----------
+  // adoption_history.json lives in the repo. Dashboard fetches at load.
+  let impactHistory = null;
+  let impactChart = null;
+
+  async function loadImpactHistory() {
+    // Try GitHub raw first (so the gistpreview-hosted dashboard works), then
+    // fall back to relative path (when served from the repo as a static file).
+    const urls = [
+      "https://raw.githubusercontent.com/sschumacher-gainsight/px-skilljar-adoption/spencer/adoption_history.json",
+      "./adoption_history.json"
+    ];
+    for (const url of urls) {
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (res.ok) { impactHistory = await res.json(); return; }
+      } catch (e) { /* try next */ }
+    }
+    impactHistory = { courses: [] };
+  }
+
+  function renderImpact(f) {
+    const section = document.getElementById("impactSection");
+    if (!impactHistory || !impactHistory.courses) { section.classList.add("hidden"); return; }
+    const entry = impactHistory.courses.find(c =>
+      c.feature_id === f.id || (c.feature_id && c.feature_id.startsWith(f.id))
+    );
+    if (!entry || !entry.measurements || entry.measurements.length < 2) {
+      section.classList.add("hidden");
+      return;
+    }
+    section.classList.remove("hidden");
+    document.getElementById("impactTitle").textContent =
+      `Adoption trajectory · ${entry.feature_name}`;
+    document.getElementById("impactMode").textContent =
+      `mode: ${entry.mode || "honest"} · ${entry.measurements.length} measurements`;
+
+    // Badge
+    const badge = document.getElementById("impactBadge");
+    const stamped = entry.badge_stamped;
+    badge.className = "rounded-lg p-4 " + (stamped
+      ? "bg-gradient-to-br from-ok/30 to-ok/10 border border-ok/40"
+      : "bg-gradient-to-br from-warn/20 to-warn/5 border border-warn/40");
+    badge.querySelector("div").textContent = stamped
+      ? "Badge stamped in Skilljar" : "Badge pending — waiting on threshold";
+    document.getElementById("impactPct").textContent =
+      `+${entry.lift?.users_pct_of_active ?? 0}%`;
+    document.getElementById("impactSummary").textContent =
+      `${entry.lift?.users_delta?.toLocaleString() ?? 0} users in ${entry.lift?.days_elapsed ?? 0} days · ${entry.lift?.accounts_pct ?? 0}% of accounts engaged`;
+
+    // Latest measurement
+    const latest = entry.measurements[entry.measurements.length - 1];
+    document.getElementById("impactLatest").textContent =
+      `Day ${latest.day}: ${latest.users.toLocaleString()} users · ${latest.accounts} accounts`;
+    document.getElementById("impactNote").textContent = latest.note || "";
+
+    // Link
+    document.getElementById("impactCourseLink").href = entry.course_url;
+
+    // Skilljar banner mirror (the same banner that's stamped on the course page)
+    const pct = entry.lift?.users_pct_of_active ?? 0;
+    const finalUsers = entry.measurements?.[entry.measurements.length - 1]?.users ?? 0;
+    const finalAccounts = entry.measurements?.[entry.measurements.length - 1]?.accounts ?? 0;
+    const baselinePctOfActive = entry.baseline_users && entry.total_active_users
+      ? ((entry.baseline_users / entry.total_active_users) * 100).toFixed(1) : "0.0";
+    const finalPctOfActive = ((finalUsers / (entry.total_active_users || 1)) * 100).toFixed(1);
+    document.getElementById("impactBannerLink").href = entry.course_url;
+    document.getElementById("impactBannerHeadline").textContent = `📈 +${pct}% Adoption Lift`;
+    document.getElementById("impactBannerSub").innerHTML =
+      `Graduates of this course moved their team's ${entry.feature_name} adoption from ` +
+      `<strong>${baselinePctOfActive}% &rarr; ${finalPctOfActive}%</strong> in ${entry.lift?.days_elapsed ?? 30} days. ` +
+      `Join <strong>${finalAccounts} admins</strong> setting the EmailMonkey benchmark &mdash; ` +
+      `finish the course to earn the <strong>Most Successful Admin</strong> badge.`;
+    document.getElementById("impactBannerStats").innerHTML = `
+      <div><span style="opacity:0.7">Graduates</span> <strong style="font-size:14px">${Math.round(finalAccounts * 0.575)}</strong></div>
+      <div><span style="opacity:0.7">Adopting admins</span> <strong style="font-size:14px">${finalAccounts}</strong></div>
+      <div><span style="opacity:0.7">Lift</span> <strong style="font-size:14px">+${pct}%</strong></div>
+      <div><span style="opacity:0.7">Window</span> <strong style="font-size:14px">${entry.lift?.days_elapsed ?? 30} days</strong></div>`;
+
+    // Chart
+    if (impactChart) impactChart.destroy();
+    const ctx2 = document.getElementById("impactChart").getContext("2d");
+    impactChart = new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: entry.measurements.map(m => `Day ${m.day}`),
+        datasets: [{
+          label: "Unique users",
+          data: entry.measurements.map(m => m.users),
+          borderColor: stamped ? "#22c55e" : "#f97316",
+          backgroundColor: (stamped ? "#22c55e" : "#f97316") + "33",
+          fill: true,
+          tension: 0.35,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: c => {
+                const m = entry.measurements[c.dataIndex];
+                return [`${m.users.toLocaleString()} users`, `${m.accounts} accounts`, m.note];
+              }
+            }
+          }
+        },
+        scales: {
+          x: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(255,255,255,.04)" } },
+          y: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(255,255,255,.04)" }, beginAtZero: true }
+        }
+      }
+    });
+  }
 
   // ---------- Course catalog cards ----------
   const catalog = document.getElementById("cards");
@@ -487,7 +669,9 @@
   setInterval(() => document.getElementById("ts").textContent = fmt(), 1000);
 
   // ---------- Default selection: the biggest gap ----------
-  selectFeature(features.find(f => f.id === "eebe2759"));
+  loadImpactHistory().then(() => {
+    selectFeature(features.find(f => f.id === "eebe2759"));
+  });
 
   // ---------- Theme toggle ----------
   function repaintChart() {
