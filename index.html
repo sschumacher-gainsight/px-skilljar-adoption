@@ -284,7 +284,41 @@
         { t: "Measure: open + impression blend", d: "Activity Page filters for unified reporting." }
       ],
       assessment: "5-question quiz · 80% to pass",
-      cta: "Triggered by PX engagement when account hits day 14 without a Socials event."
+      cta: "Triggered by PX engagement when account hits day 14 without a Socials event.",
+      ratings: [
+        { rating: 4, additional_feedback_answer: "Pacing was too fast in the scheduling section — I had to rewatch it twice." },
+        { rating: 3, additional_feedback_answer: "Missing screenshots made it hard to follow along in the UI." },
+        { rating: 4, additional_feedback_answer: "Great content overall, but lesson 3 felt rushed." },
+        { rating: 5, additional_feedback_answer: "Finally understand how to cross-post. The calendar view walkthrough was excellent." },
+        { rating: 3, additional_feedback_answer: "Would love more examples of what a good cross-channel campaign looks like." },
+        { rating: 4, additional_feedback_answer: "Very useful. Wish the social account connection step had a troubleshooting section." },
+        { rating: 4, additional_feedback_answer: "Clear and well structured. The quiz felt a bit easy though." },
+        { rating: 3, additional_feedback_answer: "Lesson 2 went by too quickly — needed more time on the approval flow." },
+        { rating: 5, additional_feedback_answer: "Best course I've taken on the platform." },
+        { rating: 3, additional_feedback_answer: "Some of the UI shown in the videos doesn't match what I see in the product." },
+        { rating: 4, additional_feedback_answer: "Good depth. Would benefit from a summary cheat sheet at the end." },
+        { rating: 4, additional_feedback_answer: "Scheduling section needs a slower walkthrough — went from 0 to advanced very fast." }
+      ],
+      recommendations: [
+        {
+          action: "Add screenshots to lesson 3",
+          detail: "update_lessons · \"Connect your social accounts\"",
+          mcpCall: "update_lessons",
+          lessonName: "Connect your social accounts"
+        },
+        {
+          action: "Split scheduling lesson into two parts",
+          detail: "update_lessons · \"Cross-post and schedule a campaign\"",
+          mcpCall: "update_lessons",
+          lessonName: "Cross-post and schedule a campaign"
+        },
+        {
+          action: "Update course description to set pacing expectations",
+          detail: "update_courses · description field",
+          mcpCall: "update_courses",
+          lessonName: null
+        }
+      ]
     },
     f0ad6e5d: {
       title: "Community Integrations Bootcamp",
@@ -301,7 +335,33 @@
         { t: "Aha Portal sync", d: "Idea capture + status round-trip." }
       ],
       assessment: "Scenario challenge",
-      cta: "Email + PX in-app guide for any admin who visits Integrations and doesn't add one in 5 minutes."
+      cta: "Email + PX in-app guide for any admin who visits Integrations and doesn't add one in 5 minutes.",
+      ratings: [
+        { rating: 4, additional_feedback_answer: "The Salesforce setup walkthrough was excellent." },
+        { rating: 3, additional_feedback_answer: "Aha integration steps were out of date — UI has changed." },
+        { rating: 5, additional_feedback_answer: "Exactly what I needed to get the ServiceNow connector working." },
+        { rating: 3, additional_feedback_answer: "Decision tree was helpful but needed more detail for smaller teams." }
+      ],
+      recommendations: [
+        {
+          action: "Update Aha integration screenshots",
+          detail: "update_lessons · \"Aha Portal sync\"",
+          mcpCall: "update_lessons",
+          lessonName: "Aha Portal sync"
+        },
+        {
+          action: "Expand decision tree for SMB use cases",
+          detail: "update_lessons · \"Pick your stack\"",
+          mcpCall: "update_lessons",
+          lessonName: "Pick your stack"
+        },
+        {
+          action: "Add a 'What you'll need' checklist to the intro",
+          detail: "update_courses · description field",
+          mcpCall: "update_courses",
+          lessonName: null
+        }
+      ]
     },
     fae4fea0: {
       title: "Inside Skilljar Training: Your First Course",
@@ -317,7 +377,32 @@
         { t: "Launch in 10 minutes", d: "Use a starter template from the Gallery." }
       ],
       assessment: "Reflection prompt + checklist",
-      cta: "Skilljar email nudge after onboarding day 7."
+      cta: "Skilljar email nudge after onboarding day 7.",
+      ratings: [
+        { rating: 5, additional_feedback_answer: "Really sold me on why we need a customer academy." },
+        { rating: 4, additional_feedback_answer: "The 10-minute launch section was ambitious — took me closer to 30." },
+        { rating: 3, additional_feedback_answer: "Would love a video walkthrough, not just text." }
+      ],
+      recommendations: [
+        {
+          action: "Add a video walkthrough to the launch lesson",
+          detail: "update_lessons · \"Launch in 10 minutes\"",
+          mcpCall: "update_lessons",
+          lessonName: "Launch in 10 minutes"
+        },
+        {
+          action: "Reset time estimate to 25 minutes",
+          detail: "update_lessons · \"Launch in 10 minutes\"",
+          mcpCall: "update_lessons",
+          lessonName: "Launch in 10 minutes"
+        },
+        {
+          action: "Update course title to reflect realistic scope",
+          detail: "update_courses · title field",
+          mcpCall: "update_courses",
+          lessonName: null
+        }
+      ]
     }
   };
 
