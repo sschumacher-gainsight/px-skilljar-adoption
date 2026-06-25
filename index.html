@@ -671,7 +671,7 @@
 
 function showFeedback(featureId) {
   const c = courses[featureId];
-  if (!c || !c.ratings) return;
+  if (!c || !c.ratings || !c.recommendations) return;
 
   const avg = (c.ratings.reduce((s, r) => s + r.rating, 0) / c.ratings.length).toFixed(1);
   const full = Math.round(avg);
@@ -709,7 +709,7 @@ function showFeedback(featureId) {
       </div>
       <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.5rem">
         <span style="font-size:1.5rem;font-weight:700;" class="text-slate-100">${avg}</span>
-        <span style="font-size:1rem;color:#f59e0b;letter-spacing:.05em">${stars}</span>
+        <span style="font-size:1rem;color:rgba(var(--c-warn)/.9);letter-spacing:.05em">${stars}</span>
         <span style="font-size:.75rem;" class="text-slate-400">${c.ratings.length} ratings</span>
       </div>
       <details class="quotes-block" open>
