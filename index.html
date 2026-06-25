@@ -208,6 +208,39 @@
     <div id="createLog" class="hidden mt-4 rounded-lg border border-line bg-ink/70 p-3 font-mono text-xs text-slate-300 space-y-1"></div>
   </section>
 
+  <!-- VERIFIED IMPACT (new — close the loop) -->
+  <section id="impactSection" class="col-span-12 bg-panel border border-line rounded-xl p-5 hidden">
+    <div class="flex items-baseline justify-between mb-4">
+      <div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-wider text-slate-400">
+          <span class="w-2 h-2 rounded-full bg-ok pulse-dot"></span> Verified Impact · Adoption Impact Loop
+        </div>
+        <h2 class="text-xl font-semibold mt-1" id="impactTitle">Adoption trajectory since launch</h2>
+      </div>
+      <div class="text-xs text-slate-500" id="impactMode">mode</div>
+    </div>
+    <div class="grid grid-cols-12 gap-5">
+      <div class="col-span-8 h-[280px]">
+        <canvas id="impactChart"></canvas>
+      </div>
+      <div class="col-span-4 flex flex-col gap-3">
+        <div id="impactBadge" class="rounded-lg p-4 bg-gradient-to-br from-ok/30 to-ok/10 border border-ok/40">
+          <div class="text-xs uppercase tracking-wider text-ok mb-1">Badge stamped in Skilljar</div>
+          <div class="text-2xl font-bold" id="impactPct">+0%</div>
+          <div class="text-xs text-slate-300 mt-1" id="impactSummary"></div>
+        </div>
+        <div class="rounded-lg p-4 border border-line bg-ink/50">
+          <div class="text-xs uppercase tracking-wider text-slate-400 mb-2">Latest measurement</div>
+          <div class="text-sm text-slate-200" id="impactLatest"></div>
+          <div class="text-xs text-slate-500 mt-2" id="impactNote"></div>
+        </div>
+        <a id="impactCourseLink" target="_blank" class="text-center text-sm bg-accent2/20 text-accent2 border border-accent2/40 px-3 py-2 rounded-lg hover:bg-accent2/30">
+          ↗ Open course on Skilljar
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Bottom: Recommended course catalog -->
   <section class="col-span-12 bg-panel border border-line rounded-xl p-5">
     <div class="flex items-baseline justify-between mb-4">
@@ -420,9 +453,101 @@
         <div class="text-sm text-slate-300">${c.cta}</div>
       </div>`;
     selected = f;
+    renderImpact(f);
   }
 
   let selected = null;
+
+  // ---------- Adoption Impact Loop: trajectory + badge ----------
+  // adoption_history.json lives in the repo. Dashboard fetches at load.
+  let impactHistory = null;
+  let impactChart = null;
+
+  async function loadImpactHistory() {
+    try {
+      const res = await fetch("./adoption_history.json", { cache: "no-store" });
+      impactHistory = await res.json();
+    } catch (e) {
+      impactHistory = { courses: [] };
+    }
+  }
+
+  function renderImpact(f) {
+    const section = document.getElementById("impactSection");
+    if (!impactHistory || !impactHistory.courses) { section.classList.add("hidden"); return; }
+    const entry = impactHistory.courses.find(c => c.feature_id === f.id);
+    if (!entry || !entry.measurements || entry.measurements.length < 2) {
+      section.classList.add("hidden");
+      return;
+    }
+    section.classList.remove("hidden");
+    document.getElementById("impactTitle").textContent =
+      `Adoption trajectory · ${entry.feature_name}`;
+    document.getElementById("impactMode").textContent =
+      `mode: ${entry.mode || "honest"} · ${entry.measurements.length} measurements`;
+
+    // Badge
+    const badge = document.getElementById("impactBadge");
+    const stamped = entry.badge_stamped;
+    badge.className = "rounded-lg p-4 " + (stamped
+      ? "bg-gradient-to-br from-ok/30 to-ok/10 border border-ok/40"
+      : "bg-gradient-to-br from-warn/20 to-warn/5 border border-warn/40");
+    badge.querySelector("div").textContent = stamped
+      ? "Badge stamped in Skilljar" : "Badge pending — waiting on threshold";
+    document.getElementById("impactPct").textContent =
+      `+${entry.lift?.users_pct_of_active ?? 0}%`;
+    document.getElementById("impactSummary").textContent =
+      `${entry.lift?.users_delta?.toLocaleString() ?? 0} users in ${entry.lift?.days_elapsed ?? 0} days · ${entry.lift?.accounts_pct ?? 0}% of accounts engaged`;
+
+    // Latest measurement
+    const latest = entry.measurements[entry.measurements.length - 1];
+    document.getElementById("impactLatest").textContent =
+      `Day ${latest.day}: ${latest.users.toLocaleString()} users · ${latest.accounts} accounts`;
+    document.getElementById("impactNote").textContent = latest.note || "";
+
+    // Link
+    document.getElementById("impactCourseLink").href = entry.course_url;
+
+    // Chart
+    if (impactChart) impactChart.destroy();
+    const ctx2 = document.getElementById("impactChart").getContext("2d");
+    impactChart = new Chart(ctx2, {
+      type: "line",
+      data: {
+        labels: entry.measurements.map(m => `Day ${m.day}`),
+        datasets: [{
+          label: "Unique users",
+          data: entry.measurements.map(m => m.users),
+          borderColor: stamped ? "#22c55e" : "#f97316",
+          backgroundColor: (stamped ? "#22c55e" : "#f97316") + "33",
+          fill: true,
+          tension: 0.35,
+          pointRadius: 5,
+          pointHoverRadius: 7,
+          borderWidth: 3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: c => {
+                const m = entry.measurements[c.dataIndex];
+                return [`${m.users.toLocaleString()} users`, `${m.accounts} accounts`, m.note];
+              }
+            }
+          }
+        },
+        scales: {
+          x: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(255,255,255,.04)" } },
+          y: { ticks: { color: "#94a3b8" }, grid: { color: "rgba(255,255,255,.04)" }, beginAtZero: true }
+        }
+      }
+    });
+  }
 
   // ---------- Course catalog cards ----------
   const catalog = document.getElementById("cards");
@@ -487,7 +612,9 @@
   setInterval(() => document.getElementById("ts").textContent = fmt(), 1000);
 
   // ---------- Default selection: the biggest gap ----------
-  selectFeature(features.find(f => f.id === "eebe2759"));
+  loadImpactHistory().then(() => {
+    selectFeature(features.find(f => f.id === "eebe2759"));
+  });
 
   // ---------- Theme toggle ----------
   function repaintChart() {

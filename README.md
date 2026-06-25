@@ -127,4 +127,37 @@ The agent in the middle is the new part — and the only piece that wasn't possi
 
 ---
 
+---
+
+## ⚡ Try it yourself: the Adoption Impact Loop skill
+
+This repo ships an installable Claude Code skill that runs the whole loop end-to-end. Anyone who clones the repo gets it automatically.
+
+```bash
+git clone https://github.com/sschumacher-gainsight/px-skilljar-adoption.git
+cd px-skilljar-adoption
+git checkout spencer
+claude
+```
+
+Then in Claude Code:
+
+```
+run adoption impact loop --demo
+```
+
+**What happens:**
+1. Detects the lowest-adoption feature set in your Gainsight PX property
+2. Pulls support docs via the Community MCP
+3. Walks through the feature with a browser MCP (Playwright or Claude_in_Chrome)
+4. Designs and publishes a Skilljar course
+5. **Records the baseline** in `adoption_history.json` (new)
+6. **Seeds a 30-day lift trajectory** in demo mode, or schedules real follow-up PX queries in honest mode (new)
+7. **Stamps the Skilljar course** with a "Lifted +X% adoption" green banner + structured label (new)
+8. Auto-refreshes the dashboard with the trajectory chart and badge
+
+The full loop runs in ~3 minutes on the live demo. See `.claude/skills/adoption-impact-loop/SKILL.md` for the full spec.
+
+---
+
 *Built for Pulse 2026 · Spencer Schumacher · Gainsight*
