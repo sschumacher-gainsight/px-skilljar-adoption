@@ -166,9 +166,9 @@
       <div class="text-xs text-slate-500 mt-1">feature sets &lt; 5% adoption</div>
     </div>
     <div class="bg-panel border border-line rounded-xl p-4">
-      <div class="text-xs uppercase tracking-wider text-slate-400">Recommended courses</div>
-      <div class="text-3xl font-bold mt-1 gradient-text">3</div>
-      <div class="text-xs text-slate-500 mt-1">auto-generated from PX data</div>
+      <div class="text-xs uppercase tracking-wider text-slate-400">Courses published</div>
+      <div class="text-3xl font-bold mt-1 gradient-text">2</div>
+      <div class="text-xs text-slate-500 mt-1">live on Skilljar · 2 lifted</div>
     </div>
   </section>
 
@@ -275,7 +275,7 @@
     { id: "97147957", name: "Campaigns Page",   product: "EmailMonkey", users: 5061, events: 32342, accounts: 183 },
     { id: "946ab76f", name: "Templates",        product: "EmailMonkey", users: 2564, events: 3972,  accounts: 180 },
     { id: "a92a23cd", name: "Login Page",       product: "EmailMonkey", users: 1832, events: 2359,  accounts: 180 },
-    { id: "ec801856", name: "Activity Page",    product: "EmailMonkey", users: 1763, events: 2596,  accounts: 179 },
+    { id: "ec801856", name: "Activity Page",    product: "EmailMonkey", users: 1957, events: 2869,  accounts: 181 },
     { id: "f8d6ac2a", name: "Archive",          product: "EmailMonkey", users: 1603, events: 1958,  accounts: 175 },
     { id: "4b13b008", name: "Integration Page", product: "EmailMonkey", users: 1596, events: 2246,  accounts: 178 },
     { id: "eebe2759", name: "Socials",          product: "EmailMonkey", users: 0,    events: 0,     accounts: 0 },
@@ -301,6 +301,24 @@
 
   // ---------- Course recommendations (one per gap feature set) ----------
   const courses = {
+    ec801856: {
+      title: "Mastering the Activity Page: From Sends to Insights",
+      tagline: "1,957 / 5,061 users — 38.7% adoption. Customers ship campaigns but rarely read what happened next.",
+      duration: "28 min · 14 lessons",
+      audience: "Email marketers, CSMs, growth leads",
+      url: "https://spencerlearningcenter.skilljar.com/mastering-the-activity-page-from-sends-to-insights",
+      live: true,
+      gap: { users: 1957, of: 5061, accounts: 181, pct: 38.7 },
+      modules: [
+        { t: "Why your Activity Page is a goldmine", d: "The 8 metrics that tell the whole story plus industry benchmarks." },
+        { t: "Tour of the Activity Page", d: "Where it lives, the summary panel, click maps, recipient detail." },
+        { t: "Filters and drill-downs", d: "Date / channel / type filters, the comparison view, contact timelines." },
+        { t: "From data to action", d: "The diagnostic ladder for weak campaigns, subscribed weekly reports." },
+        { t: "Final Project — audit a real campaign", d: "1-page audit with all 8 metrics, diagnosis, and one action item." }
+      ],
+      assessment: "4 quizzes · 12 questions · 80% to pass",
+      cta: "Triggered by PX engagement when an account ships a campaign but hasn't opened Activity in 7 days."
+    },
     eebe2759: {
       title: "Socials in EmailMonkey: From Zero to Multi-Channel",
       tagline: "0 users / 183 accounts touched it in 7 days. Biggest gap, biggest opportunity.",
@@ -475,7 +493,9 @@
   function renderImpact(f) {
     const section = document.getElementById("impactSection");
     if (!impactHistory || !impactHistory.courses) { section.classList.add("hidden"); return; }
-    const entry = impactHistory.courses.find(c => c.feature_id === f.id);
+    const entry = impactHistory.courses.find(c =>
+      c.feature_id === f.id || (c.feature_id && c.feature_id.startsWith(f.id))
+    );
     if (!entry || !entry.measurements || entry.measurements.length < 2) {
       section.classList.add("hidden");
       return;

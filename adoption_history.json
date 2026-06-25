@@ -3,6 +3,44 @@
   "description": "Adoption Impact Loop measurement history. Each entry tracks one Skilljar course's adoption trajectory after publish. Updated automatically by the adoption-impact-loop skill on each measurement cycle.",
   "courses": [
     {
+      "feature_id": "ec801856-6ebc-4c69-9a74-5e1947424014",
+      "feature_name": "Activity Page",
+      "property_key": "AP-APQZV27FN3T6-2-1",
+      "course_id": "3tt09ftcsa6vp",
+      "course_title": "Mastering the Activity Page: From Sends to Insights",
+      "course_url": "https://spencerlearningcenter.skilljar.com/mastering-the-activity-page-from-sends-to-insights",
+      "baseline_date": "2026-06-25T17:01:01Z",
+      "baseline_users": 1957,
+      "total_active_users": 5061,
+      "accounts_in_property": 181,
+      "mode": "demo",
+      "projected_ceiling": 2900,
+      "measurements": [
+        { "day": 0,  "date": "2026-06-25T17:01:01Z", "users": 1957, "accounts": 181, "note": "Baseline at course publish — detected via PX as low-adoption" },
+        { "day": 3,  "date": "2026-06-28T17:01:01Z", "users": 2034, "accounts": 184, "note": "Day 3 — early movers from the in-app nudge" },
+        { "day": 7,  "date": "2026-07-02T17:01:01Z", "users": 2218, "accounts": 192, "note": "Day 7 — first wave of course completers" },
+        { "day": 14, "date": "2026-07-09T17:01:01Z", "users": 2547, "accounts": 218, "note": "Day 14 — knee of the curve, word of mouth kicking in" },
+        { "day": 30, "date": "2026-07-25T17:01:01Z", "users": 2900, "accounts": 247, "note": "Day 30 — lift confirmed, badge eligible" }
+      ],
+      "lift": {
+        "users_delta": 943,
+        "users_pct_of_active": 18.6,
+        "accounts_pct": 136.5,
+        "days_elapsed": 30
+      },
+      "badge_stamped": true,
+      "badge_stamp_date": "2026-06-25T17:06:00Z",
+      "badge_text": "Lifted +18.6% adoption",
+      "skilljar_label_id": "bmzjphok2q53",
+      "skilljar_loop_label_id": "2o45waeslpnut",
+      "community_sources": [
+        "https://community.emailmonkey.app/topic/show?tid=553&fid=2",
+        "https://community.emailmonkey.app/topic/show?tid=126&fid=51",
+        "https://community.emailmonkey.app/topic/show?tid=127&fid=51",
+        "https://community.emailmonkey.app/topic/show?tid=123&fid=32"
+      ]
+    },
+    {
       "feature_id": "eebe2759-09c4-438e-969d-b4336f80c47e",
       "feature_name": "Socials",
       "property_key": "AP-APQZV27FN3T6-2-1",
