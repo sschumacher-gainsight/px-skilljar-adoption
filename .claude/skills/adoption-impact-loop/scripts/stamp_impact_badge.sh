@@ -46,9 +46,11 @@ BANNER=$(cat <<HTML
 HTML
 )
 
-# Fetch the existing course to preserve description
+# Fetch the existing course to preserve description.
+# IMPORTANT: Skilljar reads from long_description_html, not long_description.
+# Writing to long_description does NOT update what learners see.
 EXISTING=$(curl -sS -H "Authorization: Token $API_KEY" "$API_BASE/v1/courses/$COURSE_ID")
-EXISTING_LONG=$(echo "$EXISTING" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('long_description') or d.get('long_description_html',''))")
+EXISTING_LONG=$(echo "$EXISTING" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('long_description_html') or d.get('long_description',''))")
 
 # Strip any prior banner so we don't stack them
 EXISTING_LONG=$(python3 -c "import re,sys; s=sys.stdin.read(); print(re.sub(r'<div style=\"background:linear-gradient\\(90deg,#22c55e,#16a34a\\)[^<]*<[^>]+>[^<]+<[^>]+>[^<]+<[^>]+>[^<]+</div>\\s*','',s,flags=re.S))" <<< "$EXISTING_LONG")
@@ -56,9 +58,9 @@ EXISTING_LONG=$(python3 -c "import re,sys; s=sys.stdin.read(); print(re.sub(r'<d
 NEW_LONG="${BANNER}
 ${EXISTING_LONG}"
 
-# PATCH the course
-PAYLOAD=$(python3 -c "import json,sys; print(json.dumps({'long_description': sys.argv[1]}))" "$NEW_LONG")
-echo "→ PATCH /v1/courses/$COURSE_ID with impact banner"
+# PATCH the course — write to long_description_html so the banner actually renders
+PAYLOAD=$(python3 -c "import json,sys; print(json.dumps({'long_description_html': sys.argv[1]}))" "$NEW_LONG")
+echo "→ PATCH /v1/courses/$COURSE_ID with impact banner (long_description_html)"
 curl -sS -X PATCH -H "Authorization: Token $API_KEY" -H "Content-Type: application/json" \
   -d "$PAYLOAD" "$API_BASE/v1/courses/$COURSE_ID" >/dev/null
 
