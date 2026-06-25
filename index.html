@@ -668,6 +668,99 @@
       window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: n } }));
     });
   })();
+
+function showFeedback(featureId) {
+  const c = courses[featureId];
+  if (!c || !c.ratings) return;
+
+  const avg = (c.ratings.reduce((s, r) => s + r.rating, 0) / c.ratings.length).toFixed(1);
+  const full = Math.round(avg);
+  const stars = '★'.repeat(full) + '☆'.repeat(5 - full);
+
+  const quotesHtml = c.ratings
+    .slice(0, 3)
+    .map(r => `<div class="rating-quote">"${r.additional_feedback_answer}"</div>`)
+    .join('');
+
+  const themes = featureId === 'eebe2759'
+    ? ['Pacing', 'Missing visuals', 'Content quality']
+    : featureId === 'f0ad6e5d'
+    ? ['Outdated screenshots', 'SMB coverage', 'Onboarding clarity']
+    : ['Time estimates', 'Video content', 'Scope expectations'];
+
+  const badgesHtml = themes
+    .map(t => `<span class="theme-badge">${t}</span>`)
+    .join('');
+
+  const recsHtml = c.recommendations.map((rec, i) => `
+    <div class="rec-row" id="rec-row-${i}">
+      <div style="flex:1">
+        <div style="font-size:.8rem;font-weight:600;" class="text-slate-100">${rec.action}</div>
+        <div style="font-size:.7rem;margin-top:2px;" class="text-slate-400">${rec.detail}</div>
+      </div>
+      <button class="rec-apply-btn" data-rec-index="${i}" data-feature-id="${featureId}">Apply</button>
+    </div>`).join('');
+
+  document.getElementById('rec').innerHTML = `
+    <div class="rounded-lg border border-accent/40 bg-accent/5 p-4">
+      <div class="flex items-center gap-2 text-xs uppercase tracking-wider text-accent2 mb-2">
+        <span class="w-2 h-2 rounded-full bg-ok pulse-dot"></span>
+        Course feedback · ${c.title.split(':')[0]}
+      </div>
+      <div style="display:flex;align-items:baseline;gap:.5rem;margin-bottom:.5rem">
+        <span style="font-size:1.5rem;font-weight:700;" class="text-slate-100">${avg}</span>
+        <span style="font-size:1rem;color:#f59e0b;letter-spacing:.05em">${stars}</span>
+        <span style="font-size:.75rem;" class="text-slate-400">${c.ratings.length} ratings</span>
+      </div>
+      <details class="quotes-block" open>
+        <summary>Learner quotes</summary>
+        ${quotesHtml}
+      </details>
+    </div>
+    <div class="rounded-lg border border-line p-4">
+      <div class="text-xs uppercase tracking-wider text-slate-400 mb-2">Synthesized themes</div>
+      <div style="margin-bottom:.75rem">${badgesHtml}</div>
+      <div class="text-xs uppercase tracking-wider text-slate-400 mb-2">Recommended updates</div>
+      ${recsHtml}
+    </div>`;
+
+  document.querySelectorAll('.rec-apply-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyRecommendation(btn));
+  });
+}
+
+function applyRecommendation(btn) {
+  const featureId = btn.dataset.featureId;
+  const idx = parseInt(btn.dataset.recIndex, 10);
+  const rec = courses[featureId].recommendations[idx];
+
+  btn.textContent = 'Applying…';
+  btn.disabled = true;
+
+  const log = document.getElementById('createLog');
+  log.classList.remove('hidden');
+
+  const steps = [
+    [`▸ Calling Skilljar MCP · ${rec.mcpCall}`, 'text-slate-400'],
+    rec.lessonName
+      ? [`  PATCH /v1/lessons/{id} { lesson: "${rec.lessonName}" }`, 'text-slate-500']
+      : [`  PATCH /v1/courses/{id} { field: "description" }`, 'text-slate-500'],
+    [`✓ Updated · "${rec.action}"`, 'text-ok'],
+  ];
+
+  let i = 0;
+  const tick = () => {
+    if (i >= steps.length) {
+      btn.textContent = 'Applied ✓';
+      btn.classList.add('applied');
+      return;
+    }
+    appendLog(steps[i][0], steps[i][1]);
+    i++;
+    setTimeout(tick, 320 + Math.random() * 180);
+  };
+  tick();
+}
 </script>
 
 </body>
