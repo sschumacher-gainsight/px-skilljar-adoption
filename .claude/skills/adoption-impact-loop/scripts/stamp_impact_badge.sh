@@ -71,10 +71,15 @@ LABEL=$(curl -sS -X POST -H "Authorization: Token $API_KEY" -H "Content-Type: ap
 LABEL_ID=$(python3 -c "import json,sys; d=json.loads(sys.stdin.read() or '{}'); print(d.get('id',''))" <<< "$LABEL")
 
 if [[ -n "$LABEL_ID" ]]; then
+  # Skilljar applies labels via PATCH on the course (the /label-courses endpoint
+  # 403s with a CSRF error — it's an admin-UI route, not a REST one). Merge with
+  # existing labels rather than overwriting.
   echo "→ Apply label $LABEL_ID to course $COURSE_ID"
-  curl -sS -X POST -H "Authorization: Token $API_KEY" -H "Content-Type: application/json" \
-    -d "$(python3 -c "import json,sys; print(json.dumps({'label': sys.argv[1], 'course': sys.argv[2]}))" "$LABEL_ID" "$COURSE_ID")" \
-    "$API_BASE/v1/label-courses" >/dev/null || true
+  EXISTING_LABELS=$(echo "$EXISTING" | python3 -c "import sys,json; d=json.load(sys.stdin); print(json.dumps(d.get('labels', [])))")
+  MERGED_LABELS=$(python3 -c "import json,sys; existing=json.loads(sys.argv[1]); new=sys.argv[2]; merged=list({*existing, new}); print(json.dumps(merged))" "$EXISTING_LABELS" "$LABEL_ID")
+  curl -sS -X PATCH -H "Authorization: Token $API_KEY" -H "Content-Type: application/json" \
+    -d "$(python3 -c "import json,sys; print(json.dumps({'labels': json.loads(sys.argv[1])}))" "$MERGED_LABELS")" \
+    "$API_BASE/v1/courses/$COURSE_ID" >/dev/null || true
 fi
 
 # Update adoption_history.json
