@@ -482,12 +482,19 @@
   let impactChart = null;
 
   async function loadImpactHistory() {
-    try {
-      const res = await fetch("./adoption_history.json", { cache: "no-store" });
-      impactHistory = await res.json();
-    } catch (e) {
-      impactHistory = { courses: [] };
+    // Try GitHub raw first (so the gistpreview-hosted dashboard works), then
+    // fall back to relative path (when served from the repo as a static file).
+    const urls = [
+      "https://raw.githubusercontent.com/sschumacher-gainsight/px-skilljar-adoption/spencer/adoption_history.json",
+      "./adoption_history.json"
+    ];
+    for (const url of urls) {
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (res.ok) { impactHistory = await res.json(); return; }
+      } catch (e) { /* try next */ }
     }
+    impactHistory = { courses: [] };
   }
 
   function renderImpact(f) {
