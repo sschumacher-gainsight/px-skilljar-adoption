@@ -192,6 +192,67 @@
       "badge_text": "Lifted +24.7% adoption",
       "skilljar_label_id": "214at7lvb9bcb",
       "published_course_id": "2y6c45yqzr7ox"
+    },
+    {
+      "feature_id": "eebe2759-09c4-438e-969d-b4336f80c47e",
+      "feature_name": "Socials",
+      "property_key": "AP-APQZV27FN3T6-2-1",
+      "course_id": "1swsuql8noq2p",
+      "course_title": "Socials in EmailMonkey: From Zero to Multi-Channel",
+      "course_url": "https://spencerlearningcenter.skilljar.com/socials-in-emailmonkey-from-zero-to-multi-channel-1",
+      "baseline_date": "2026-06-30T22:18:42.990938Z",
+      "baseline_users": 0,
+      "total_active_users": 5445,
+      "accounts_in_property": 185,
+      "mode": "demo",
+      "projected_ceiling": 1361,
+      "measurements": [
+        {
+          "day": 0,
+          "date": "2026-06-30T22:18:42.990938Z",
+          "users": 0,
+          "accounts": 0,
+          "note": "Baseline at course publish"
+        },
+        {
+          "day": 3,
+          "date": "2026-07-03T22:18:42.990938Z",
+          "users": 237,
+          "accounts": 27,
+          "note": "Day 3 follow-up"
+        },
+        {
+          "day": 7,
+          "date": "2026-07-07T22:18:42.990938Z",
+          "users": 462,
+          "accounts": 53,
+          "note": "Day 7 follow-up \u2014 early adopters engaging"
+        },
+        {
+          "day": 14,
+          "date": "2026-07-14T22:18:42.990938Z",
+          "users": 964,
+          "accounts": 111,
+          "note": "Day 14 follow-up \u2014 knee of the curve"
+        },
+        {
+          "day": 30,
+          "date": "2026-07-30T22:18:42.990938Z",
+          "users": 1345,
+          "accounts": 155,
+          "note": "Day 30 follow-up \u2014 lift confirmed, badge eligible"
+        }
+      ],
+      "lift": {
+        "users_delta": 1345,
+        "users_pct_of_active": 24.7,
+        "accounts_pct": 83.8,
+        "days_elapsed": 30
+      },
+      "badge_stamped": true,
+      "badge_stamp_date": "2026-06-30T22:19:29.518932Z",
+      "badge_text": "Lifted +24.7% adoption",
+      "skilljar_label_id": "214at7lvb9bcb"
     }
   ]
 }
