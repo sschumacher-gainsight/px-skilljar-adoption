@@ -289,6 +289,7 @@
     { id: "f8d6ac2a", name: "Archive",          product: "EmailMonkey", users: 1603, events: 1958,  accounts: 175 },
     { id: "4b13b008", name: "Integration Page", product: "EmailMonkey", users: 1596, events: 2246,  accounts: 178 },
     { id: "eebe2759", name: "Socials",          product: "EmailMonkey", users: 0,    events: 0,     accounts: 0 },
+    { id: "f75074e4", name: "Profile Navigation", product: "EmailMonkey", users: 1, events: 5, accounts: 1 },
     { id: "f0ad6e5d", name: "Community Integrations", product: "Community", users: 1, events: 1, accounts: 1 },
     { id: "fae4fea0", name: "Courses",          product: "Training", users: 0, events: 0, accounts: 0 },
   ];
@@ -379,6 +380,23 @@
       ],
       assessment: "Reflection prompt + checklist",
       cta: "Skilljar email nudge after onboarding day 7."
+    },
+    f75074e4: {
+      title: "Your EmailMonkey Profile & Account: Find It, Set It Up, Lock It Down",
+      tagline: "1 / 5,445 users — 0.02% adoption. The lowest-adoption module in EmailMonkey, hidden behind an unlabeled avatar icon.",
+      duration: "12 min · 4 lessons + quiz",
+      audience: "All EmailMonkey users, admins",
+      url: "https://spencerlearningcenter.skilljar.com/your-emailmonkey-profile-account-find-it-set-it-up-lock-it-down",
+      live: true,
+      gap: { users: 1, of: 5445, accounts: 1, pct: 0.02 },
+      modules: [
+        { t: "Why your profile & account settings matter", d: "Security, deliverability, and privacy — the three things the profile menu controls." },
+        { t: "Where it lives: finding the profile menu", d: "The unlabeled avatar icon, top-right, and the six destinations behind it." },
+        { t: "Setting up your profile (Edit Profile)", d: "Personal Information, Change Password, Email & SMS, Manage Contact." },
+        { t: "Account, privacy & verifying changes", d: "Account parameters, privacy settings, and confirming your changes saved." }
+      ],
+      assessment: "5-question quiz · 70% to pass",
+      cta: "Triggered by PX when a user is active 7+ days but has never opened the profile menu."
     }
   };
 

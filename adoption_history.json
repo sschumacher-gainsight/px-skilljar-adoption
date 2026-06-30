@@ -16,11 +16,41 @@
       "mode": "demo",
       "projected_ceiling": 2900,
       "measurements": [
-        { "day": 0,  "date": "2026-06-25T17:01:01Z", "users": 1957, "accounts": 181, "note": "Baseline at course publish — detected via PX as low-adoption" },
-        { "day": 3,  "date": "2026-06-28T17:01:01Z", "users": 2034, "accounts": 184, "note": "Day 3 — early movers from the in-app nudge" },
-        { "day": 7,  "date": "2026-07-02T17:01:01Z", "users": 2218, "accounts": 192, "note": "Day 7 — first wave of course completers" },
-        { "day": 14, "date": "2026-07-09T17:01:01Z", "users": 2547, "accounts": 218, "note": "Day 14 — knee of the curve, word of mouth kicking in" },
-        { "day": 30, "date": "2026-07-25T17:01:01Z", "users": 2900, "accounts": 247, "note": "Day 30 — lift confirmed, badge eligible" }
+        {
+          "day": 0,
+          "date": "2026-06-25T17:01:01Z",
+          "users": 1957,
+          "accounts": 181,
+          "note": "Baseline at course publish \u2014 detected via PX as low-adoption"
+        },
+        {
+          "day": 3,
+          "date": "2026-06-28T17:01:01Z",
+          "users": 2034,
+          "accounts": 184,
+          "note": "Day 3 \u2014 early movers from the in-app nudge"
+        },
+        {
+          "day": 7,
+          "date": "2026-07-02T17:01:01Z",
+          "users": 2218,
+          "accounts": 192,
+          "note": "Day 7 \u2014 first wave of course completers"
+        },
+        {
+          "day": 14,
+          "date": "2026-07-09T17:01:01Z",
+          "users": 2547,
+          "accounts": 218,
+          "note": "Day 14 \u2014 knee of the curve, word of mouth kicking in"
+        },
+        {
+          "day": 30,
+          "date": "2026-07-25T17:01:01Z",
+          "users": 2900,
+          "accounts": 247,
+          "note": "Day 30 \u2014 lift confirmed, badge eligible"
+        }
       ],
       "lift": {
         "users_delta": 943,
@@ -54,11 +84,41 @@
       "mode": "demo",
       "projected_ceiling": 1500,
       "measurements": [
-        { "day": 0,  "date": "2026-05-12T18:05:20Z", "users": 0,     "accounts": 0,   "note": "Baseline at course publish" },
-        { "day": 3,  "date": "2026-05-15T18:05:20Z", "users": 47,    "accounts": 12,  "note": "Day 3 follow-up" },
-        { "day": 7,  "date": "2026-05-19T18:05:20Z", "users": 198,   "accounts": 38,  "note": "Day 7 follow-up — early adopters engaging" },
-        { "day": 14, "date": "2026-05-26T18:05:20Z", "users": 612,   "accounts": 87,  "note": "Day 14 follow-up — knee of the curve" },
-        { "day": 30, "date": "2026-06-11T18:05:20Z", "users": 1247,  "accounts": 142, "note": "Day 30 follow-up — lift confirmed, badge eligible" }
+        {
+          "day": 0,
+          "date": "2026-05-12T18:05:20Z",
+          "users": 0,
+          "accounts": 0,
+          "note": "Baseline at course publish"
+        },
+        {
+          "day": 3,
+          "date": "2026-05-15T18:05:20Z",
+          "users": 47,
+          "accounts": 12,
+          "note": "Day 3 follow-up"
+        },
+        {
+          "day": 7,
+          "date": "2026-05-19T18:05:20Z",
+          "users": 198,
+          "accounts": 38,
+          "note": "Day 7 follow-up \u2014 early adopters engaging"
+        },
+        {
+          "day": 14,
+          "date": "2026-05-26T18:05:20Z",
+          "users": 612,
+          "accounts": 87,
+          "note": "Day 14 follow-up \u2014 knee of the curve"
+        },
+        {
+          "day": 30,
+          "date": "2026-06-11T18:05:20Z",
+          "users": 1247,
+          "accounts": 142,
+          "note": "Day 30 follow-up \u2014 lift confirmed, badge eligible"
+        }
       ],
       "lift": {
         "users_delta": 1247,
@@ -70,6 +130,68 @@
       "badge_stamp_date": "2026-06-25T16:41:47Z",
       "badge_text": "Lifted +24.6% adoption",
       "skilljar_label_id": "3vijsoquy30oa"
+    },
+    {
+      "feature_id": "f75074e4-0d8a-4aeb-95df-e651e337c449",
+      "feature_name": "Profile Navigation",
+      "property_key": "AP-APQZV27FN3T6-2-1",
+      "course_id": "2e2i6a65yj9f4",
+      "course_title": "Your EmailMonkey Profile & Account: Find It, Set It Up, Lock It Down",
+      "course_url": "https://spencerlearningcenter.skilljar.com/your-emailmonkey-profile-account-find-it-set-it-up-lock-it-down",
+      "baseline_date": "2026-06-30T18:59:04.112979Z",
+      "baseline_users": 1,
+      "total_active_users": 5445,
+      "accounts_in_property": 185,
+      "mode": "demo",
+      "projected_ceiling": 1361,
+      "measurements": [
+        {
+          "day": 0,
+          "date": "2026-06-30T18:59:04.112979Z",
+          "users": 1,
+          "accounts": 0,
+          "note": "Baseline at course publish"
+        },
+        {
+          "day": 3,
+          "date": "2026-07-03T18:59:04.112979Z",
+          "users": 238,
+          "accounts": 27,
+          "note": "Day 3 follow-up"
+        },
+        {
+          "day": 7,
+          "date": "2026-07-07T18:59:04.112979Z",
+          "users": 462,
+          "accounts": 53,
+          "note": "Day 7 follow-up \u2014 early adopters engaging"
+        },
+        {
+          "day": 14,
+          "date": "2026-07-14T18:59:04.112979Z",
+          "users": 965,
+          "accounts": 111,
+          "note": "Day 14 follow-up \u2014 knee of the curve"
+        },
+        {
+          "day": 30,
+          "date": "2026-07-30T18:59:04.112979Z",
+          "users": 1345,
+          "accounts": 155,
+          "note": "Day 30 follow-up \u2014 lift confirmed, badge eligible"
+        }
+      ],
+      "lift": {
+        "users_delta": 1344,
+        "users_pct_of_active": 24.7,
+        "accounts_pct": 83.8,
+        "days_elapsed": 30
+      },
+      "badge_stamped": true,
+      "badge_stamp_date": "2026-06-30T18:59:41.506067Z",
+      "badge_text": "Lifted +24.7% adoption",
+      "skilljar_label_id": "214at7lvb9bcb",
+      "published_course_id": "2y6c45yqzr7ox"
     }
   ]
 }
