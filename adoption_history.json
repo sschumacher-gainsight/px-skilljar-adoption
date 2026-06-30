@@ -71,67 +71,6 @@
       ]
     },
     {
-      "feature_id": "eebe2759-09c4-438e-969d-b4336f80c47e",
-      "feature_name": "Socials",
-      "property_key": "AP-APQZV27FN3T6-2-1",
-      "course_id": "y7waa42370y",
-      "course_title": "Socials in EmailMonkey: From Zero to Multi-Channel",
-      "course_url": "https://spencerlearningcenter.skilljar.com/socials-in-emailmonkey-from-zero-to-multi-channel",
-      "baseline_date": "2026-05-12T18:05:20Z",
-      "baseline_users": 0,
-      "total_active_users": 5061,
-      "accounts_in_property": 183,
-      "mode": "demo",
-      "projected_ceiling": 1500,
-      "measurements": [
-        {
-          "day": 0,
-          "date": "2026-05-12T18:05:20Z",
-          "users": 0,
-          "accounts": 0,
-          "note": "Baseline at course publish"
-        },
-        {
-          "day": 3,
-          "date": "2026-05-15T18:05:20Z",
-          "users": 47,
-          "accounts": 12,
-          "note": "Day 3 follow-up"
-        },
-        {
-          "day": 7,
-          "date": "2026-05-19T18:05:20Z",
-          "users": 198,
-          "accounts": 38,
-          "note": "Day 7 follow-up \u2014 early adopters engaging"
-        },
-        {
-          "day": 14,
-          "date": "2026-05-26T18:05:20Z",
-          "users": 612,
-          "accounts": 87,
-          "note": "Day 14 follow-up \u2014 knee of the curve"
-        },
-        {
-          "day": 30,
-          "date": "2026-06-11T18:05:20Z",
-          "users": 1247,
-          "accounts": 142,
-          "note": "Day 30 follow-up \u2014 lift confirmed, badge eligible"
-        }
-      ],
-      "lift": {
-        "users_delta": 1247,
-        "users_pct_of_active": 24.6,
-        "accounts_pct": 77.6,
-        "days_elapsed": 30
-      },
-      "badge_stamped": true,
-      "badge_stamp_date": "2026-06-25T16:41:47Z",
-      "badge_text": "Lifted +24.6% adoption",
-      "skilljar_label_id": "3vijsoquy30oa"
-    },
-    {
       "feature_id": "f75074e4-0d8a-4aeb-95df-e651e337c449",
       "feature_name": "Profile Navigation",
       "property_key": "AP-APQZV27FN3T6-2-1",
