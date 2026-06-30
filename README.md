@@ -66,7 +66,7 @@ The PX MCP returned adoption for every feature set in our EmailMonkey demo prope
 
 A complete, browsable course on the Skilljar staging tenant:
 
-**[Socials in EmailMonkey: From Zero to Multi-Channel →](https://spencerlearningcenter.skilljar.com/socials-in-emailmonkey-from-zero-to-multi-channel)**
+**[Socials in EmailMonkey: From Zero to Multi-Channel →](https://spencerlearningcenter.skilljar.com/socials-in-emailmonkey-from-zero-to-multi-channel-1)**
 
 | | |
 |---|---|
