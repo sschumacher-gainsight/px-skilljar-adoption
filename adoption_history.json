@@ -70,6 +70,32 @@
       "badge_stamp_date": "2026-06-25T16:41:47Z",
       "badge_text": "Lifted +24.6% adoption",
       "skilljar_label_id": "3vijsoquy30oa"
+    },
+    {
+      "feature_id": "f75074e4-0d8a-4aeb-95df-e651e337c449",
+      "feature_name": "Profile Navigation",
+      "property_key": "AP-APQZV27FN3T6-2-1",
+      "course_id": "1ebyjfpu3adjw",
+      "course_title": "Master Your Profile Navigation: Account Control Hidden in One Click",
+      "course_url": "https://spencerlearningcenter.skilljar.com/master-your-profile-navigation-account-control-hidden-in-one-click",
+      "baseline_date": "2026-07-02T16:11:24Z",
+      "baseline_users": 3,
+      "total_active_users": 5061,
+      "accounts_in_property": 183,
+      "mode": "honest",
+      "measurements": [
+        { "day": 0, "date": "2026-07-02T16:11:24Z", "users": 3, "accounts": 3, "note": "Baseline at course publish — 0.06% adoption, confirmed No Courses label" }
+      ],
+      "badge_stamped": false,
+      "ux_findings": [
+        "Avatar is the sole entry point — no label, tooltip, or affordance indicating it is clickable",
+        "Blue notification dot creates visual noise without guiding the user to click",
+        "Account and Settings sections have overlapping names causing confusion (identity data vs. privacy prefs)",
+        "Change Password is buried 2 levels deep: avatar → Edit Profile → Change Password tab",
+        "Privacy Settings page contains Lorem Ipsum placeholder text — live product documentation gap",
+        "Community and Academy links are only discoverable via this hidden menu"
+      ]
     }
   ]
 }
+
